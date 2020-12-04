@@ -43,11 +43,11 @@ class MysqlZhu:
             self.__connect = pymysql.connect(**data_dict)
             self.__cursor = self.__connect.cursor()
         except Exception as ex:
-            # print("-----------主机:%s 数据库:%s 用户:%s 连接失败！！-----------提示："%(self.host,self.database,self.user),ex)
+            # print("-----------Host:%s Database:%s User:%s error！！-----------提示："%(self.host,self.database,self.user),ex)
             self.__cursor = None
         else:
             pass
-            # print("-----------主机:%s 数据库:%s 用户:%s 连接成功！！-----------"%(self.host,self.database,self.user))
+            # print("-----------Host:%s Database:%s 用户:%s success！！-----------"%(self.host,self.database,self.user))
 
     # 执行sql语句
     def execute_sql(self, sql,*args):
@@ -63,7 +63,7 @@ class MysqlZhu:
             lock.acquire()
             self.__cursor.execute(sql,args=args)
             lock.release()
-            # print("-----------主机:%s 数据库:%s 用户:%s 动作:%s 参数：%s完成！-----------"%(self.host,self.database,self.user,sql,args))
+            # print("-----------Host:%s Database:%s User:%s action:%s param：%s Complete！-----------"%(self.host,self.database,self.user,sql,args))
             return self.__cursor.fetchall()
         else:
             # 执行更新、插入、修改语句
@@ -71,7 +71,7 @@ class MysqlZhu:
             self.__cursor.execute(sql,args=args)
             self.__connect.commit()
             lock.release()
-            # print("-----------主机:%s 数据库:%s 用户:%s 动作:%s 参数：%s完成！-----------"%(self.host,self.database,self.user,sql,args))
+            # print("-----------Host:%s Database:%s User:%s action:%s param：%s Complete！-----------"%(self.host,self.database,self.user,sql,args))
             return self.__cursor.lastrowid
         
         
@@ -82,5 +82,5 @@ class MysqlZhu:
         """
         self.__cursor.close()
         self.__connect.close()
-        # print("-----------主机:%s 数据库:%s 用户:%s 数据库关闭！！-----------"%(self.host,self.database,self.user))
-        # print("-----------数据库关闭!-----------")
+        # print("-----------Host:%s Database:%s User:%s The database is down！！-----------"%(self.host,self.database,self.user))
+        # print("-----------The database is down!-----------")
