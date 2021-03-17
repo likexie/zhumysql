@@ -1,4 +1,6 @@
+# -*- coding:utf8 -*-
 import pymysql
+
 import re
 import threading
 lock = threading.Lock()
